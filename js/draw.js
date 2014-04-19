@@ -5,93 +5,71 @@ canvas.width = canvas.height = 200;
 
 var circleCross = ['o','x'];
 
+
 var board = [[40,40,null],[100,40,null],[160,40,null],
              [40,100,null],[100,100,null],[160,100,null],
              [40,160,null],[100,160,null],[160,160,null]];
 
-
-
-var a =  Math.floor(Math.random() * 9);
-//var b =  Math.floor(Math.random() * 3);
-var b =  Math.floor(Math.random() * 2);
-
-var youFigure = Math.abs(b-1);
-
-
-
-
-//alert(board[a][b]);
-//
-//
-//if(board[1][0] === 0){
-//	alert(board[1][0]);
-//}
-
-
-
-
-ctx.strokeStyle = "#003300";
-ctx.beginPath();
-ctx.lineWidth = 5;
-ctx.moveTo(60+10, 10);
-ctx.lineTo(60+10, 190);
-ctx.stroke();
-ctx.moveTo(60+60+10, 10);
-ctx.lineTo(60+60+10, 190);
-ctx.stroke();
-ctx.moveTo(10, 60+10);
-ctx.lineTo(190, 60+10);
-ctx.stroke();
-
-ctx.moveTo(10, 60+60+10);
-ctx.lineTo(190, 60+60+10);
-ctx.stroke();
-
-board[a][2] = circleCross[b];
-
-//alert(board[a][2]);
-//alert(board[2][2]);
-
-if(circleCross[b] == 'o'){
-	drawCircle(ctx,board[a][0],board[a][1]);
-}else if(circleCross[b] == 'x'){
-	drawCross(ctx,board[a][0],board[a][1]);
+function initBoard(){
+    board = [[40,40,null],[100,40,null],[160,40,null],
+        [40,100,null],[100,100,null],[160,100,null],
+        [40,160,null],[100,160,null],[160,160,null]];
 }
 
-//drawCross(ctx,40,40);
-//
-//drawCircle(ctx,100,100);
-////drawCircle(ctx,160,160);
-//
-//drawCircle(ctx,40,100);
-//drawCircle(ctx,40,160);
-//
-//drawCircle(ctx,100,40);
-//drawCircle(ctx,100,160);
-//
-//drawCircle(ctx,160,40);
-//drawCircle(ctx,160,100);
+var a, b,youFigure;
+function generatePositionAndFigure(){
+     a =  Math.floor(Math.random() * 9);
+     b =  Math.floor(Math.random() * 2) ;
+    youFigure = Math.abs(b-1);
+
+}
 
 
 
 
-//ctx.moveTo(40, 40);
-//ctx.beginPath();
-//ctx.arc(40, 40, 20, 0, Math.PI*2 , false);
-//ctx.stroke();
 
 
-//ctx.moveTo(100, 100);
-//ctx.beginPath();
-//ctx.arc(100, 100, 20, 0, 2 * Math.PI, false);
-////ctx.fillStyle = 'green';
-////ctx.fill();
-//ctx.lineWidth = 5;
-//ctx.strokeStyle = 'red';
+
+function drawBoard(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    initBoard();
+    ctx.strokeStyle = "#003300";
+    ctx.beginPath();
+    ctx.lineWidth = 5;
+    ctx.moveTo(60+10, 10);
+    ctx.lineTo(60+10, 190);
+    ctx.stroke();
+    ctx.moveTo(60+60+10, 10);
+    ctx.lineTo(60+60+10, 190);
+    ctx.stroke();
+    ctx.moveTo(10, 60+10);
+    ctx.lineTo(190, 60+10);
+    ctx.stroke();
+
+    ctx.moveTo(10, 60+60+10);
+    ctx.lineTo(190, 60+60+10);
+    ctx.stroke();
+    ctx.closePath();
+    ctx.stroke();
+    generatePositionAndFigure();
+    startMove();
+}
 
 
-ctx.closePath();
-ctx.stroke();
+
+function startMove(){
+    board[a][2] = circleCross[b];
+    if(circleCross[b] == 'o'){
+        drawCircle(ctx,board[a][0],board[a][1]);
+    }else if(circleCross[b] == 'x'){
+        drawCross(ctx,board[a][0],board[a][1]);
+    }
+}
+
+
+
+
+
 
 function drawCircle(ctx,x,y){
 	ctx.lineWidth = 5;
@@ -245,24 +223,3 @@ canvas.addEventListener('click', function(evt) {
 	
 },false);
 
-
-
-//ctx.fillStyle = "blue";
-//ctx.beginPath();
-//ctx.arc(50, 50, 10, 0, Math.PI , true);
-//ctx.arc(150, 50, 25, 0, Math.PI * 2, true);
-//ctx.fill();
-//// draw a red triangle
-//ctx.fillStyle = "red";
-//ctx.beginPath();
-//ctx.moveTo(100, 75);
-//ctx.lineTo(75, 125);
-//ctx.lineTo(125, 125);
-//ctx.fill();
-//// draw a green semi-circle
-//ctx.strokeStyle = "green";
-//ctx.beginPath();
-//ctx.scale(1, 0.5);
-//ctx.arc(100, 300, 75, Math.PI, 0, true);
-//ctx.closePath();
-//ctx.stroke();
